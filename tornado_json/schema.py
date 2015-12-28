@@ -111,7 +111,7 @@ def validate(input_schema=None, output_schema=None,
 
             # If no ValidationError has been raised up until here, we write
             #  back output
-            self.success(output)
+            #self.success(output)
 
         setattr(_wrapper, "input_schema", input_schema)
         setattr(_wrapper, "output_schema", output_schema)
