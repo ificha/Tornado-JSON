@@ -23,16 +23,6 @@ class BaseHandler(RequestHandler):
         return db_conn
 
 
-class ViewHandler(BaseHandler):
-    """Handler for views"""
-
-    def initialize(self):
-        """
-        - Set Content-type for HTML
-        """
-        self.set_header("Content-Type", "text/html")
-
-
 class APIHandler(BaseHandler, JSendMixin):
     """RequestHandler for API calls
 
@@ -46,4 +36,17 @@ class APIHandler(BaseHandler, JSendMixin):
         - Set Content-type for JSON
         """
         self.set_header("Content-Type", "application/json")
+
+
+    def error(self, error, http_code):
+
+        self.write({'status': 'failed', 'error': error})
+        self.set_status(http_code)
+        self.finish()
+
+
+    def success(self, data):
+
+        self.write({'status': 'success', 'data': data})
+        self.finish()
 
