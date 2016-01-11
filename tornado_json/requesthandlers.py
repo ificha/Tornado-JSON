@@ -23,7 +23,7 @@ class BaseHandler(RequestHandler):
         return db_conn
 
 
-class APIHandler(BaseHandler, JSendMixin):
+class APIHandler(BaseHandler):
     """RequestHandler for API calls
 
     - Sets header as ``application/json``
