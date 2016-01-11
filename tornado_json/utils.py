@@ -5,9 +5,7 @@ from functools import wraps
 
 def container(dec):
     """Meta-decorator (for decorating decorators)
-
     Keeps around original decorated function as a property ``orig_func``
-
     :param dec: Decorator to decorate
     :type  dec: function
     :returns: Decorated decorator
@@ -23,7 +21,6 @@ def container(dec):
 
 def extract_method(wrapped_method):
     """Gets original method if wrapped_method was decorated
-
     :rtype: any([types.FunctionType, types.MethodType])
     """
     # If method was decorated with validate, the original method
@@ -40,7 +37,6 @@ def is_method(method):
 
 def is_handler_subclass(cls, classnames=("ViewHandler", "APIHandler")):
     """Determines if ``cls`` is indeed a subclass of ``classnames``
-
     This function should only be used with ``cls`` from ``pyclbr.readmodule``
     """
     if isinstance(cls, pyclbr.Class):
