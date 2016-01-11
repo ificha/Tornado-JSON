@@ -4,7 +4,7 @@ from functools import wraps
 import jsonschema
 import tornado.gen
 
-from tornado_json.exceptions import APIError
+from exceptions import APIError
 
 try:
     from tornado.concurrent import is_future
@@ -13,14 +13,13 @@ except ImportError:
     from tornado.concurrent import Future
     is_future = lambda x: isinstance(x, Future)
 
-from tornado_json.utils import container
+from utils import container
 
 
 def validate(input_schema=None, output_schema=None,
              input_example=None, output_example=None,
              format_checker=None, on_empty_404=False):
     """Parameterized decorator for schema validation
-
     :type format_checker: jsonschema.FormatChecker or None
     :type on_empty_404: bool
     :param on_empty_404: If this is set, and the result from the
@@ -29,14 +28,11 @@ def validate(input_schema=None, output_schema=None,
     @container
     def _validate(rh_method):
         """Decorator for RequestHandler schema validation
-
         This decorator:
-
             - Validates request body against input schema of the method
             - Calls the ``rh_method`` and gets output from it
             - Validates output against output schema of the method
             - Calls ``JSendMixin.success`` to write the validated output
-
         :type  rh_method: function
         :param rh_method: The RequestHandler method to be decorated
         :returns: The decorated method
